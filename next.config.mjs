@@ -2,7 +2,9 @@
 const nextConfig = {
     images:{
         domains:[
-            "www.salesforce.com"
+            "www.salesforce.com",
+            "static.vecteezy.com",
+            "images.unsplash.com"
         ]
     }
 };
