@@ -28,8 +28,7 @@ const About = () => {
               <br/>
               <br/>-Dynamic Websites
               <br/>
-              <br/>
-              -Fast and Handy Mobile Apps
+              <br/>-Fast and Handy Mobile Apps
             </p>
             <Button url="/contact" text="contact us"/>
           </div>

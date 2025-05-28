@@ -4,7 +4,8 @@ const nextConfig = {
         domains:[
             "www.salesforce.com",
             "static.vecteezy.com",
-            "images.unsplash.com"
+            "images.unsplash.com",
+            "www.shutterstock.com"
         ]
     }
 };
