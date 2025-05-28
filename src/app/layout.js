@@ -24,9 +24,11 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <div className="flex flex-col justify-between max-w-[1366px] min-h-[100vh] p-0 pl-[60px] pr-[60px] m-0 ml-auto mr-auto">
         <Navbar/>
         {children}
         <Footer/>
+        </div>
       </body>
     </html>
   );
