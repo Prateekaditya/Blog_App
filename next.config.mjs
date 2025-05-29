@@ -5,7 +5,9 @@ const nextConfig = {
             "www.salesforce.com",
             "static.vecteezy.com",
             "images.unsplash.com",
-            "www.shutterstock.com"
+            "www.shutterstock.com",
+            "images.remotePatterns" ,
+            "images.pexels.com"
         ]
     }
 };
