@@ -1,28 +1,35 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-
-const Blog = () => {
+  async function getData(){
+    const res=await fetch('https://jsonplaceholder.typicode.com/posts',{
+      cache:"no-store",
+    })
+    if(!res.ok){
+      throw new Error ('Failed To fetch data')
+    }
+    return res.json();
+  }
+const Blog = async() => {
+  const data =await getData()
   return (
    <>
-    <div>
       <div >
-      <Link className='flex items-center gap-[50px] mb-[50px]' href="/blog/testId">
-        <div>
+        {data.map((item)=>(
+      <Link className='flex items-center gap-[50px] mb-[80px]' href="/blog/testId" key={item.id}>
+        <div className='flex-1/4'>
         <Image className='object-cover' src="https://images.pexels.com/photos/712520/pexels-photo-712520.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
         height={250}
-        width={450}
+        width={400}
         alt='ahsg'
         />
         </div>
-        <div >
-        <h1 className='mb-[10px] text-3xl'>Title</h1>
-        <p className='text-[15px] '>desc</p>
+        <div className='flex-1/2' >
+        <h1 className='mb-[10px] text-3xl'>{item.title}</h1>
+        <p className='text-[15px] '>{item.body}</p>
       </div>
-      </Link>
+      </Link>))}
       </div>
-      
-    </div>
    </>
   )
 }
