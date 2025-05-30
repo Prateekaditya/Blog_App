@@ -1,6 +1,10 @@
 import React from 'react'
 import Image from 'next/image'
 import Button from '@/components/Button/Button'
+export const metadata = {
+  title: "Nitoq Contact",
+  description: "This is a blog app",
+};
 const Contact = () => {
   return (
     <>

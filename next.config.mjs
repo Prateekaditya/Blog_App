@@ -7,7 +7,8 @@ const nextConfig = {
             "images.unsplash.com",
             "www.shutterstock.com",
             "images.remotePatterns" ,
-            "images.pexels.com"
+            "images.pexels.com",
+            "encrypted-tbn0.gstatic.com"
         ]
     }
 };
