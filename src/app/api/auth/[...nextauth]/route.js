@@ -1,4 +1,5 @@
 import NextAuth from "next-auth";
+
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import User from "@/models/User";
@@ -58,7 +59,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
     }),
   ],
   pages: {
-    signIn: "/dashboard/login",
     error: "/dashboard/login",
   },
   callbacks: {

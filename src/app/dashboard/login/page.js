@@ -1,13 +1,16 @@
 "use client";
-import {signIn} from"next-auth/react"
+import {signIn, useSession} from"next-auth/react"
 import React, { useState } from 'react';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 const Login = () => {
+  const session =useSession();
   const [err, setErr] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErr(false);
@@ -45,6 +48,12 @@ const Login = () => {
     //   setLoading(false);
     // }
   };
+  if(session.status==="loading"){
+    return <p>loading</p>
+  }
+  if(session.status==="authenticated"){
+    router?.push("/dashboard")
+  }
   return (
     <div className="flex flex-col items-center justify-center gap-[30px]">
        <form onSubmit={handleSubmit} className='w-[300px] flex flex-col gap-[20px]'>
@@ -69,6 +78,7 @@ const Login = () => {
           Login
         </button>
       </form>
+      <Link href="/dashboard/register">Create a new account</Link>
       <button className="cursor-pointer p-[12px] bg-[#ed6c4f] border-none rounded-[5px] text-white " onClick={()=>signIn("google")}>Login with Goggle</button>
     </div>
   )
