@@ -1,5 +1,4 @@
 import NextAuth from "next-auth";
-
 import Google from "next-auth/providers/google";
 import Credentials from "next-auth/providers/credentials";
 import User from "@/models/User";
@@ -60,6 +59,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   ],
   pages: {
     error: "/dashboard/login",
+    signIn: "/dashboard/login", // Add this for better UX
   },
   callbacks: {
     async jwt({ token, user }) {
@@ -74,7 +74,48 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
       return session;
     },
+    // Add redirect callback for production
+    async redirect({ url, baseUrl }) {
+      // Allows relative callback URLs
+      if (url.startsWith("/")) return `${baseUrl}${url}`
+      // Allows callback URLs on the same origin
+      else if (new URL(url).origin === baseUrl) return url
+      return baseUrl
+    },
+    // Handle Google OAuth sign-in
+    async signIn({ user, account, profile }) {
+      if (account?.provider === "google") {
+        try {
+          await connect();
+          
+          // Check if user already exists
+          const existingUser = await User.findOne({ email: user.email });
+          
+          if (!existingUser) {
+            // Create new user if doesn't exist
+            const newUser = new User({
+              name: user.name,
+              email: user.email,
+              // No password for Google users
+            });
+            await newUser.save();
+          }
+          
+          return true;
+        } catch (error) {
+          console.error("Error saving Google user:", error);
+          return false;
+        }
+      }
+      return true;
+    },
   },
+  // Add session strategy
+  session: {
+    strategy: "jwt",
+  },
+  // Add secret (important for production)
+  secret: process.env.NEXTAUTH_SECRET,
 });
 
 export const { GET, POST } = handlers;

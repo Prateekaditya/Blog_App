@@ -15,38 +15,23 @@ const Login = () => {
     e.preventDefault();
     setErr(false);
     setLoading(true);
-    
+  
     const email = e.target[0].value;
     const password = e.target[1].value;
-    signIn("credentials",{email,password})
-    // try {
-    //   // Fix: Use absolute path or ensure correct relative path
-    //   const res = await fetch("/api/auth/register", {
-    //     method: "POST",
-    //     headers: {
-    //       "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //       name,
-    //       email,
-    //       password
-    //     })
-    //   });
-      
-    //   const data = await res.json();
-      
-    //   if (res.status === 201) {
-    //     router.push("/dashboard/login?success=Account has been created");
-    //   } else {
-    //     setErr(data.message || "Something went wrong");
-    //   }
-      
-    // } catch (err) {
-    //   console.error("Registration error:", err);
-    //   setErr("Network error. Please try again.");
-    // } finally {
-    //   setLoading(false);
-    // }
+  
+    const res = await signIn("credentials", {
+      email,
+      password,
+      redirect: false, // 🛠️ Important!
+    });
+  
+    setLoading(false);
+  
+    if (res?.error) {
+      setErr(res.error);
+    } else {
+      router.push("/dashboard");
+    }
   };
   if(session.status==="loading"){
     return <p>loading</p>
