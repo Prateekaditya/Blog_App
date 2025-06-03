@@ -61,6 +61,25 @@ const Dashboard = () => {
     }
   }
 
+  // Fixed delete function
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`/api/posts/${id}`, {
+        method: "DELETE",
+      })
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
+      console.log('Post deleted successfully')
+      // Re-fetch posts after deletion
+      mutate()
+    } catch (error) {
+      console.error('Error deleting post:', error)
+    }
+  }
+
   if (status === "loading") return <p>Loading session...</p>
   if (status === "unauthenticated") {
     router.push("/dashboard/login")
@@ -76,12 +95,17 @@ const Dashboard = () => {
           <p>Error loading posts: {error.message}</p>
         ) : data && data.length > 0 ? (
           data.map((post, index) => (
-            <div className='flex items-center justify-between mt-[50px] mb-[50px]' key={post.id || index}>
+            <div className='flex items-center justify-between mt-[50px] mb-[50px]' key={post._id || index}>
               <div className='w-[200px] h-[200px]'>
                 <Image className='object-cover' src={post.img} alt="" width={200} height={100} />
               </div>
               <h2>{post.title}</h2>
-              <span className='cursor-pointer text-red-500'>X</span>
+              <span 
+                className='cursor-pointer text-red-500 hover:text-red-700' 
+                onClick={() => handleDelete(post._id)}
+              >
+                X
+              </span>
             </div>
           ))
         ) : (
