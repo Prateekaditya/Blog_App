@@ -39,7 +39,6 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
             throw new Error("Wrong credentials!");
           }
 
-          // Return user object (without password)
           return {
             id: user._id.toString(),
             name: user.name,
@@ -57,10 +56,10 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
-  pages: {
-    error: "/dashboard/login",
-    signIn: "/dashboard/login", // Add this for better UX
-  },
+  // Remove or modify the custom error page
+  // pages: {
+  //   error: "/dashboard/login",
+  // },
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
@@ -74,48 +73,9 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
       return session;
     },
-    // Add redirect callback for production
-    async redirect({ url, baseUrl }) {
-      // Allows relative callback URLs
-      if (url.startsWith("/")) return `${baseUrl}${url}`
-      // Allows callback URLs on the same origin
-      else if (new URL(url).origin === baseUrl) return url
-      return baseUrl
-    },
-    // Handle Google OAuth sign-in
-    async signIn({ user, account, profile }) {
-      if (account?.provider === "google") {
-        try {
-          await connect();
-          
-          // Check if user already exists
-          const existingUser = await User.findOne({ email: user.email });
-          
-          if (!existingUser) {
-            // Create new user if doesn't exist
-            const newUser = new User({
-              name: user.name,
-              email: user.email,
-              // No password for Google users
-            });
-            await newUser.save();
-          }
-          
-          return true;
-        } catch (error) {
-          console.error("Error saving Google user:", error);
-          return false;
-        }
-      }
-      return true;
-    },
   },
-  // Add session strategy
-  session: {
-    strategy: "jwt",
-  },
-  // Add secret (important for production)
-  secret: process.env.NEXTAUTH_SECRET,
+  // Add explicit secret configuration
+  secret: process.env.AUTH_SECRET || process.env.NEXTAUTH_SECRET,
 });
 
 export const { GET, POST } = handlers;
