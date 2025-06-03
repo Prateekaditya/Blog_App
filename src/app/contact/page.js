@@ -9,7 +9,8 @@ const Contact = () => {
   return (
     <>
       <div>
-        <h1 className='text-[60px] mb-[20px] text-center'>Let's Keep in Touch</h1>
+      <h1 className='text-[60px] mb-[20px] text-center'>Let&apos;s Keep in Touch</h1>
+
         <div className='flex gap-[100px] items-center'>
           <div className='flex-1 h-[430px] relative'>
             <Image src="https://www.shutterstock.com/image-vector/get-touch-abstract-concept-vector-600nw-2253719001.jpg" fill={true} alt="contact us image" className='grayscale object-contain'/>
