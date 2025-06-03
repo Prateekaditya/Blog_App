@@ -2,7 +2,9 @@ import Image from 'next/image'
 import { notFound } from 'next/navigation';
 
 async function getData(id){
-    const res=await fetch(`http://localhost:3000/api/posts/${id}`,{
+const urlll=process.env.NEXTAUTH_URL || "http://localhost:3000"
+  
+    const res=await fetch(`${urlll}/api/posts/${id}`,{
       cache:"no-store",
     })
     if(!res.ok){
@@ -13,17 +15,7 @@ async function getData(id){
 // const Id = async({params}) => {
    
 // }
-// export async function generateMetadata({ params}) {
-//   const asjd = await params
- 
-//   // fetch post information
-//   const post = getData(asjd.id)
-//  console.log(post)
-//   return {
-//     title: post.title,
-//     description: post.desc,
-//   }
-// }
+// ==
 async function Id({params}){
     const pleaseWork = await params
     const data =await getData(pleaseWork.id)
