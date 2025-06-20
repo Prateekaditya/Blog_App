@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import DarkModeToggle from '../DarkModeToggle/DarkModeToggle';
 import { CiMenuBurger } from "react-icons/ci";
 import { signOut, useSession } from "next-auth/react";
+
 import { RxCross1 } from "react-icons/rx";
 const Navbar = () => {
     const [open,setOpen] =useState(false);
