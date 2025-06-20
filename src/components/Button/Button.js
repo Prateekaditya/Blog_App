@@ -4,7 +4,7 @@ import React from 'react'
 const Button = ({text,url}) => {
   return (
         <Link href={url}>
-            <button className='cursor-pointer p-[12px] bg-[#ed6c4f] border-none rounded-[5px] w-max text-white'>{text}</button>
+            <button className='cursor-pointer p-[8px] md:p-[12px] bg-[#ed6c4f] border-none rounded-[5px] w-max text-white'>{text}</button>
         </Link>
     
   )
