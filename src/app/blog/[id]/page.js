@@ -21,21 +21,24 @@ async function Id({params}){
     const data =await getData(pleaseWork.id)
     return (
       <div>
-          <div className='flex'>
+          <div className='flex gap-3'>
               <div className='flex-1 flex flex-col justify-between'>
-                  <h1 className='text-4xl'>{data.title}</h1>
-                  <p className='text-[15px] font-[300]'>{data.desc}</p>
+                  <h1 className='text-xl md:text-4xl'>{data.title}</h1>
+                  <div className='md:hidden  mt-2 mb-2 h-[200px] relative'>
+                  <Image className='object-cover' src={data.img} alt="jdsasa" fill={true}/>
+              </div>
+                  <p className='text-[12px] md:text-[15px] font-[300]'>{data.desc}</p>
                   <div className='flex items-center gap-[10px]'>
                       <Image className='object-cover rounded-full' src="https://images.pexels.com/photos/712520/pexels-photo-712520.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="jdsasa" width={40} height={40}/>
-                      <span>{data.userName}</span>
+                      <span className='text-md'>{data.userName}</span>
                   </div>
               </div>
-              <div className='flex-1 h-[300px] relative'>
+              <div className='hidden md:block md:flex-1 md:h-[300px] relative'>
                   <Image className='object-cover' src={data.img} alt="jdsasa" fill={true}/>
               </div>
           </div>
           <div >
-              <p className='mt-[20px] text-[15px] font-[300] text-justify'>
+              <p className='mt-[20px] text-[12px] md:text-[15px] font-[300] text-justify'>
               {data.content}
               </p>
           </div>
