@@ -21,7 +21,7 @@ const  Category = async({params}) => {
         <h1 className="text-[#ed6c4f]">{res.category}</h1>
     {/* flexrowrevsremorediv */}
         {data.map((item,index)=>(
-        <div className={`flex gap-12 mt-12 mb-24 ${
+        <div className={`hidden md:flex gap-12 mt-12 mb-24 ${
             index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
           }`} key={index}>
             <div className="flex-1 flex flex-col gap-[20px] justify-center">
@@ -32,7 +32,21 @@ const  Category = async({params}) => {
             <div className="flex-1 h-[500px] relative">
                 <Image src={item.image} fill={true} alt="nad" className="object-cover"/>
             </div>
-        </div>))}
+        </div>
+        ))}
+        {data.map((item,index)=>(
+        <div className= 'md:hidden gap-12 mt-12 mb-24' key={index}>
+            <div className="flex-1 h-[500px] relative">
+                <Image src={item.image} fill={true} alt="nad" className="object-cover"/>
+            </div>
+            <div className="flex-1 flex flex-col gap-[20px] justify-center">
+                <h1 className="text-3xl">{item.title}</h1>
+                <h4 className="text-[15px]">{item.desc}</h4>
+                <Button text="See More" url="#"/>
+            </div>
+            
+        </div>
+        ))}
     </div>
   )
 }

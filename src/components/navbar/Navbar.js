@@ -62,7 +62,7 @@ const Navbar = () => {
             </div>
             <div className='transition ease-in duration-200 flex gap-20 lg:hidden'>
                 <DarkModeToggle/>
-                { open ? (<div className='absolute flex flex-col backdrop-blur-md gap-5 h-screen  top-0 right-0 w-[30vh] bg-gray-500 p-4'>
+                { open ? (<div className='absolute z-40 flex flex-col backdrop-blur-md gap-5 h-screen  top-0 right-0 w-[30vh] bg-gray-500 p-4'>
                 <span className='flex justify-end' onClick={handleClick}><RxCross1/></span>
                 {links.map(link=>(
                     <Link className='' key={link.id} href={link.url}>{link.title}</Link>
