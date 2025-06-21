@@ -47,7 +47,7 @@ const Navbar = () => {
     const session = useSession();
   return (
     <>
-        <div className='flex h-[100px] justify-between items-center'>
+        <div className='flex h-[100px]  justify-between items-center'>
             <Link className='font-bold text-[22px]' href="/">Notiq </Link>
             <div className='hidden lg:flex gap-[20px] items-center'>
                 <DarkModeToggle/>
@@ -63,7 +63,7 @@ const Navbar = () => {
             </div>
             <div className='transition ease-in duration-200 flex gap-20 lg:hidden'>
                 <DarkModeToggle/>
-                { open ? (<div className='absolute z-40 flex flex-col backdrop-blur-md gap-5 h-screen  top-0 right-0 w-[30vh] bg-gray-500 p-4'>
+                { open ? (<div className='fixed z-40 flex flex-col backdrop-blur-md gap-5   top-0 right-0 w-[30vh] h-full bg-gray-500 p-4'>
                 <span className='flex justify-end' onClick={handleClick}><RxCross1/></span>
                 {links.map(link=>(
                     <Link className='' key={link.id} href={link.url}>{link.title}</Link>
