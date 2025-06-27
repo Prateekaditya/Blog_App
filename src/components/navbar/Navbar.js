@@ -61,7 +61,7 @@ const Navbar = () => {
                 </button>
                  )}
             </div>
-            <div className='transition ease-in duration-200 flex gap-20 lg:hidden'>
+            <div className='transition ease-in duration-200  flex gap-20 lg:hidden'>
                 <DarkModeToggle/>
                 { open ? (<div className='fixed z-40 flex flex-col backdrop-blur-md gap-5   top-0 right-0 w-[30vh] h-full bg-gray-500 p-4'>
                 <span className='flex justify-end' onClick={handleClick}><RxCross1/></span>
